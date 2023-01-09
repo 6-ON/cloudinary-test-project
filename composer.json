@@ -1,0 +1,19 @@
+{
+    "name": "lenovo/cloudinary-test-project",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Lenovo\\CloudinaryTestProject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "6-ON",
+            "email": "aminhatim6@gmail.com"
+        }
+    ],
+    "require": {
+        "cloudinary/cloudinary_php": "^2",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}

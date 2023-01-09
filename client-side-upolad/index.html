@@ -1,0 +1,58 @@
+<?php
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cloudinary Sample</title>
+</head>
+<body>
+<form action="uploading.php" method="post" enctype="multipart/form-data">
+    <label for="image">upload your image here 😁</label><br>
+    <input type="file" id="image" name="testing">
+    <input type="submit" name="submit">
+</form>
+</body>
+<script>
+
+
+    const url = "https://api.cloudinary.com/v1_1/dgmmjsxbf/auto/upload"
+    const apiKey = "571349964156337"
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const signatureResponse = await fetch('getSignature.php').then((data) => (data.json()));
+
+
+        const files = document.querySelector("[type=file]").files;
+        const formData = new FormData();
+
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            formData.append("file", file);
+            // required Params
+            formData.append("api_key", apiKey)
+            formData.append("signature", signatureResponse.signature)
+            formData.append("timestamp", signatureResponse.timestamp)
+            //   optionals Params
+            formData.append("folder", "testing");
+            fetch(url, {
+                method: "POST",
+                body: formData
+            })
+                .then((response) => {
+                    return response.text();
+                })
+                .then((data) => {
+                    document.getElementById("data").innerHTML += data;
+                });
+        }
+    });
+
+</script>
+</html>
