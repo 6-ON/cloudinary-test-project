@@ -1,5 +1,4 @@
 # Cloudinary Api Utilisation
-
 A simple practical example to upload image to Cloudinary CDN With two Methods
 
 # Usage
